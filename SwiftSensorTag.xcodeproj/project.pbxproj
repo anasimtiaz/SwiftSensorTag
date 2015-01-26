@@ -1,0 +1,439 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		97E449241A76A8EB00AECF47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E449231A76A8EB00AECF47 /* AppDelegate.swift */; };
+		97E449271A76A8EB00AECF47 /* SwiftSensorTag.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 97E449251A76A8EB00AECF47 /* SwiftSensorTag.xcdatamodeld */; };
+		97E449291A76A8EB00AECF47 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E449281A76A8EB00AECF47 /* ViewController.swift */; };
+		97E4492C1A76A8EB00AECF47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97E4492A1A76A8EB00AECF47 /* Main.storyboard */; };
+		97E4492E1A76A8EB00AECF47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97E4492D1A76A8EB00AECF47 /* Images.xcassets */; };
+		97E449311A76A8EB00AECF47 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E4492F1A76A8EB00AECF47 /* LaunchScreen.xib */; };
+		97E4493D1A76A8EB00AECF47 /* SwiftSensorTagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E4493C1A76A8EB00AECF47 /* SwiftSensorTagTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		97E449371A76A8EB00AECF47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97E449161A76A8EB00AECF47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 97E4491D1A76A8EB00AECF47;
+			remoteInfo = SwiftSensorTag;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		97E4491E1A76A8EB00AECF47 /* SwiftSensorTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftSensorTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97E449221A76A8EB00AECF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97E449231A76A8EB00AECF47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		97E449261A76A8EB00AECF47 /* SwiftSensorTag.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftSensorTag.xcdatamodel; sourceTree = "<group>"; };
+		97E449281A76A8EB00AECF47 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		97E4492B1A76A8EB00AECF47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		97E4492D1A76A8EB00AECF47 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		97E449301A76A8EB00AECF47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		97E449361A76A8EB00AECF47 /* SwiftSensorTagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftSensorTagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		97E4493B1A76A8EB00AECF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97E4493C1A76A8EB00AECF47 /* SwiftSensorTagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSensorTagTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		97E4491B1A76A8EB00AECF47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97E449331A76A8EB00AECF47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		97E449151A76A8EB00AECF47 = {
+			isa = PBXGroup;
+			children = (
+				97E449201A76A8EB00AECF47 /* SwiftSensorTag */,
+				97E449391A76A8EB00AECF47 /* SwiftSensorTagTests */,
+				97E4491F1A76A8EB00AECF47 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		97E4491F1A76A8EB00AECF47 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				97E4491E1A76A8EB00AECF47 /* SwiftSensorTag.app */,
+				97E449361A76A8EB00AECF47 /* SwiftSensorTagTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		97E449201A76A8EB00AECF47 /* SwiftSensorTag */ = {
+			isa = PBXGroup;
+			children = (
+				97E449231A76A8EB00AECF47 /* AppDelegate.swift */,
+				97E449281A76A8EB00AECF47 /* ViewController.swift */,
+				97E4492A1A76A8EB00AECF47 /* Main.storyboard */,
+				97E4492D1A76A8EB00AECF47 /* Images.xcassets */,
+				97E4492F1A76A8EB00AECF47 /* LaunchScreen.xib */,
+				97E449251A76A8EB00AECF47 /* SwiftSensorTag.xcdatamodeld */,
+				97E449211A76A8EB00AECF47 /* Supporting Files */,
+			);
+			path = SwiftSensorTag;
+			sourceTree = "<group>";
+		};
+		97E449211A76A8EB00AECF47 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				97E449221A76A8EB00AECF47 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		97E449391A76A8EB00AECF47 /* SwiftSensorTagTests */ = {
+			isa = PBXGroup;
+			children = (
+				97E4493C1A76A8EB00AECF47 /* SwiftSensorTagTests.swift */,
+				97E4493A1A76A8EB00AECF47 /* Supporting Files */,
+			);
+			path = SwiftSensorTagTests;
+			sourceTree = "<group>";
+		};
+		97E4493A1A76A8EB00AECF47 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				97E4493B1A76A8EB00AECF47 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		97E4491D1A76A8EB00AECF47 /* SwiftSensorTag */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97E449401A76A8EB00AECF47 /* Build configuration list for PBXNativeTarget "SwiftSensorTag" */;
+			buildPhases = (
+				97E4491A1A76A8EB00AECF47 /* Sources */,
+				97E4491B1A76A8EB00AECF47 /* Frameworks */,
+				97E4491C1A76A8EB00AECF47 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftSensorTag;
+			productName = SwiftSensorTag;
+			productReference = 97E4491E1A76A8EB00AECF47 /* SwiftSensorTag.app */;
+			productType = "com.apple.product-type.application";
+		};
+		97E449351A76A8EB00AECF47 /* SwiftSensorTagTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97E449431A76A8EB00AECF47 /* Build configuration list for PBXNativeTarget "SwiftSensorTagTests" */;
+			buildPhases = (
+				97E449321A76A8EB00AECF47 /* Sources */,
+				97E449331A76A8EB00AECF47 /* Frameworks */,
+				97E449341A76A8EB00AECF47 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				97E449381A76A8EB00AECF47 /* PBXTargetDependency */,
+			);
+			name = SwiftSensorTagTests;
+			productName = SwiftSensorTagTests;
+			productReference = 97E449361A76A8EB00AECF47 /* SwiftSensorTagTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		97E449161A76A8EB00AECF47 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Anas Imtiaz";
+				TargetAttributes = {
+					97E4491D1A76A8EB00AECF47 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					97E449351A76A8EB00AECF47 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 97E4491D1A76A8EB00AECF47;
+					};
+				};
+			};
+			buildConfigurationList = 97E449191A76A8EB00AECF47 /* Build configuration list for PBXProject "SwiftSensorTag" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 97E449151A76A8EB00AECF47;
+			productRefGroup = 97E4491F1A76A8EB00AECF47 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				97E4491D1A76A8EB00AECF47 /* SwiftSensorTag */,
+				97E449351A76A8EB00AECF47 /* SwiftSensorTagTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		97E4491C1A76A8EB00AECF47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97E4492C1A76A8EB00AECF47 /* Main.storyboard in Resources */,
+				97E449311A76A8EB00AECF47 /* LaunchScreen.xib in Resources */,
+				97E4492E1A76A8EB00AECF47 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97E449341A76A8EB00AECF47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		97E4491A1A76A8EB00AECF47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97E449291A76A8EB00AECF47 /* ViewController.swift in Sources */,
+				97E449271A76A8EB00AECF47 /* SwiftSensorTag.xcdatamodeld in Sources */,
+				97E449241A76A8EB00AECF47 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97E449321A76A8EB00AECF47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97E4493D1A76A8EB00AECF47 /* SwiftSensorTagTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		97E449381A76A8EB00AECF47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 97E4491D1A76A8EB00AECF47 /* SwiftSensorTag */;
+			targetProxy = 97E449371A76A8EB00AECF47 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		97E4492A1A76A8EB00AECF47 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				97E4492B1A76A8EB00AECF47 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		97E4492F1A76A8EB00AECF47 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				97E449301A76A8EB00AECF47 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		97E4493E1A76A8EB00AECF47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		97E4493F1A76A8EB00AECF47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		97E449411A76A8EB00AECF47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SwiftSensorTag/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		97E449421A76A8EB00AECF47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SwiftSensorTag/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		97E449441A76A8EB00AECF47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SwiftSensorTagTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftSensorTag.app/SwiftSensorTag";
+			};
+			name = Debug;
+		};
+		97E449451A76A8EB00AECF47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SwiftSensorTagTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftSensorTag.app/SwiftSensorTag";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		97E449191A76A8EB00AECF47 /* Build configuration list for PBXProject "SwiftSensorTag" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97E4493E1A76A8EB00AECF47 /* Debug */,
+				97E4493F1A76A8EB00AECF47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97E449401A76A8EB00AECF47 /* Build configuration list for PBXNativeTarget "SwiftSensorTag" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97E449411A76A8EB00AECF47 /* Debug */,
+				97E449421A76A8EB00AECF47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		97E449431A76A8EB00AECF47 /* Build configuration list for PBXNativeTarget "SwiftSensorTagTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97E449441A76A8EB00AECF47 /* Debug */,
+				97E449451A76A8EB00AECF47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		97E449251A76A8EB00AECF47 /* SwiftSensorTag.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				97E449261A76A8EB00AECF47 /* SwiftSensorTag.xcdatamodel */,
+			);
+			currentVersion = 97E449261A76A8EB00AECF47 /* SwiftSensorTag.xcdatamodel */;
+			path = SwiftSensorTag.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 97E449161A76A8EB00AECF47 /* Project object */;
+}

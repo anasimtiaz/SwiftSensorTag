@@ -14,6 +14,9 @@
 		97E4492E1A76A8EB00AECF47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97E4492D1A76A8EB00AECF47 /* Images.xcassets */; };
 		97E449311A76A8EB00AECF47 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E4492F1A76A8EB00AECF47 /* LaunchScreen.xib */; };
 		97E4493D1A76A8EB00AECF47 /* SwiftSensorTagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E4493C1A76A8EB00AECF47 /* SwiftSensorTagTests.swift */; };
+		97E449471A76A91B00AECF47 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E449461A76A91B00AECF47 /* CoreBluetooth.framework */; };
+		97E449491A76AA8E00AECF47 /* SensorTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E449481A76AA8E00AECF47 /* SensorTag.swift */; };
+		97E4494B1A77AD6800AECF47 /* SensorTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E4494A1A77AD6800AECF47 /* SensorTagTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,9 @@
 		97E449361A76A8EB00AECF47 /* SwiftSensorTagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftSensorTagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		97E4493B1A76A8EB00AECF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97E4493C1A76A8EB00AECF47 /* SwiftSensorTagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSensorTagTests.swift; sourceTree = "<group>"; };
+		97E449461A76A91B00AECF47 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		97E449481A76AA8E00AECF47 /* SensorTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorTag.swift; sourceTree = "<group>"; };
+		97E4494A1A77AD6800AECF47 /* SensorTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorTagTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97E449471A76A91B00AECF47 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +68,7 @@
 		97E449151A76A8EB00AECF47 = {
 			isa = PBXGroup;
 			children = (
+				97E449461A76A91B00AECF47 /* CoreBluetooth.framework */,
 				97E449201A76A8EB00AECF47 /* SwiftSensorTag */,
 				97E449391A76A8EB00AECF47 /* SwiftSensorTagTests */,
 				97E4491F1A76A8EB00AECF47 /* Products */,
@@ -81,6 +89,8 @@
 			children = (
 				97E449231A76A8EB00AECF47 /* AppDelegate.swift */,
 				97E449281A76A8EB00AECF47 /* ViewController.swift */,
+				97E449481A76AA8E00AECF47 /* SensorTag.swift */,
+				97E4494A1A77AD6800AECF47 /* SensorTagTableViewCell.swift */,
 				97E4492A1A76A8EB00AECF47 /* Main.storyboard */,
 				97E4492D1A76A8EB00AECF47 /* Images.xcassets */,
 				97E4492F1A76A8EB00AECF47 /* LaunchScreen.xib */,
@@ -215,9 +225,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97E449491A76AA8E00AECF47 /* SensorTag.swift in Sources */,
 				97E449291A76A8EB00AECF47 /* ViewController.swift in Sources */,
 				97E449271A76A8EB00AECF47 /* SwiftSensorTag.xcdatamodeld in Sources */,
 				97E449241A76A8EB00AECF47 /* AppDelegate.swift in Sources */,
+				97E4494B1A77AD6800AECF47 /* SensorTagTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

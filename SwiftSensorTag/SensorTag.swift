@@ -2,8 +2,8 @@
 //  SensorTag.swift
 //  SwiftSensorTag
 //
-//  Created by Anas Imtiaz on 26/01/2015.
-//  Copyright (c) 2015 Anas Imtiaz. All rights reserved.
+//  Created by Anas Imtiaz on 13/11/2015.
+//  Copyright © 2015 Anas Imtiaz. All rights reserved.
 //
 
 import Foundation
@@ -74,7 +74,7 @@ class SensorTag {
     // Check if the characteristic has a valid config UUID
     class func validConfigCharacteristic (characteristic : CBCharacteristic) -> Bool {
         if characteristic.UUID == IRTemperatureConfigUUID || characteristic.UUID == AccelerometerConfigUUID ||
-        characteristic.UUID == HumidityConfigUUID || characteristic.UUID == MagnetometerConfigUUID ||
+            characteristic.UUID == HumidityConfigUUID || characteristic.UUID == MagnetometerConfigUUID ||
             characteristic.UUID == BarometerConfigUUID || characteristic.UUID == GyroscopeConfigUUID {
                 return true
         }

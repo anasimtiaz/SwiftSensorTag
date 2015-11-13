@@ -2,8 +2,8 @@
 //  SensorTagTableViewCell.swift
 //  SwiftSensorTag
 //
-//  Created by Anas Imtiaz on 27/01/2015.
-//  Copyright (c) 2015 Anas Imtiaz. All rights reserved.
+//  Created by Anas Imtiaz on 13/11/2015.
+//  Copyright © 2015 Anas Imtiaz. All rights reserved.
 //
 
 import UIKit
@@ -12,15 +12,15 @@ class SensorTagTableViewCell: UITableViewCell {
     
     var sensorNameLabel  = UILabel()
     var sensorValueLabel = UILabel()
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -45,5 +45,5 @@ class SensorTagTableViewCell: UITableViewCell {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
 }

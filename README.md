@@ -5,6 +5,7 @@ This project is an example of how to connect an iOS device to Texas Instruments 
 
 The project here is explained in detail on a companion blog post at: [Interfacing TI SensorTag with iOS Devices using Swift](http://anasimtiaz.com/?p=201)
 
+UPDATED for Swift 3.
 
 ## Issues and Contributions
 

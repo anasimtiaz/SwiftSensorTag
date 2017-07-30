@@ -55,7 +55,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         
         // Set up status label
         statusLabel = UILabel()
-        statusLabel.textAlignment = NSTextAlignment.Center
+        statusLabel.textAlignment = NSTextAlignment.center
         statusLabel.text = "Loading..."
         statusLabel.font = UIFont(name: "HelveticaNeue-Light", size: 12)
         statusLabel.sizeToFit()
@@ -68,7 +68,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         
         // Initialize all sensor values and labels
         allSensorLabels = SensorTag.getSensorLabels()
-        for (var i=0; i<allSensorLabels.count; i++) {
+        for _ in 0..<allSensorLabels.count {
             allSensorValues.append(0)
         }
     }
@@ -83,23 +83,23 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     /******* CBCentralManagerDelegate *******/
      
      // Check status of BLE hardware
-    func centralManagerDidUpdateState(central: CBCentralManager) {
-        if central.state == CBCentralManagerState.PoweredOn {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        if central.state == CBManagerState.poweredOn {
             // Scan for peripherals if BLE is turned on
-            central.scanForPeripheralsWithServices(nil, options: nil)
+            central.scanForPeripherals(withServices: nil, options: nil)
             self.statusLabel.text = "Searching for BLE Devices"
         }
         else {
             // Can have different conditions for all states if needed - show generic alert for now
-            showAlertWithText("Error", message: "Bluetooth switched off or not initialized")
+            showAlertWithText(header: "Error", message: "Bluetooth switched off or not initialized")
         }
     }
     
     
     // Check out the discovered peripherals to find Sensor Tag
-    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         
-        if SensorTag.sensorTagFound(advertisementData) == true {
+        if SensorTag.sensorTagFound(advertisementData: advertisementData) == true {
             
             // Update Status Label
             self.statusLabel.text = "Sensor Tag Found"
@@ -108,25 +108,26 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             self.centralManager.stopScan()
             self.sensorTagPeripheral = peripheral
             self.sensorTagPeripheral.delegate = self
-            self.centralManager.connectPeripheral(peripheral, options: nil)
+            self.centralManager.connect(peripheral, options: nil)
         }
         else {
             self.statusLabel.text = "Sensor Tag NOT Found"
             //showAlertWithText(header: "Warning", message: "SensorTag Not Found")
         }
     }
+
     
     // Discover services of the peripheral
-    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         self.statusLabel.text = "Discovering peripheral services"
         peripheral.discoverServices(nil)
     }
     
     
     // If disconnected, start searching again
-    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         self.statusLabel.text = "Disconnected"
-        central.scanForPeripheralsWithServices(nil, options: nil)
+        central.scanForPeripherals(withServices: nil, options: nil)
     }
     
     /******* CBCentralPeripheralDelegate *******/
@@ -139,35 +140,35 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
      // Barometer Service
      // Gyroscope Service
      // (Others are not implemented)
-    func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         self.statusLabel.text = "Looking at peripheral services"
         for service in peripheral.services! {
             let thisService = service as CBService
-            if SensorTag.validService(thisService) {
+            if SensorTag.validService(service: thisService) {
                 // Discover characteristics of all valid services
-                peripheral.discoverCharacteristics(nil, forService: thisService)
+                peripheral.discoverCharacteristics(nil, for: thisService)
             }
         }
     }
     
     
     // Enable notification and sensor for each characteristic of valid service
-    func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         
         self.statusLabel.text = "Enabling sensors"
         
         var enableValue = 1
-        let enablyBytes = NSData(bytes: &enableValue, length: sizeof(UInt8))
+        let enablyBytes = NSData(bytes: &enableValue, length: MemoryLayout<UInt8>.size)
         
         for charateristic in service.characteristics! {
             let thisCharacteristic = charateristic as CBCharacteristic
-            if SensorTag.validDataCharacteristic(thisCharacteristic) {
+            if SensorTag.validDataCharacteristic(characteristic: thisCharacteristic) {
                 // Enable Sensor Notification
-                self.sensorTagPeripheral.setNotifyValue(true, forCharacteristic: thisCharacteristic)
+                self.sensorTagPeripheral.setNotifyValue(true, for: thisCharacteristic)
             }
-            if SensorTag.validConfigCharacteristic(thisCharacteristic) {
+            if SensorTag.validConfigCharacteristic(characteristic: thisCharacteristic) {
                 // Enable Sensor
-                self.sensorTagPeripheral.writeValue(enablyBytes, forCharacteristic: thisCharacteristic, type: CBCharacteristicWriteType.WithResponse)
+                self.sensorTagPeripheral.writeValue(enablyBytes as Data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
             }
         }
         
@@ -176,18 +177,18 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     
     // Get data values when they are updated
-    func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         
         self.statusLabel.text = "Connected"
         
-        if characteristic.UUID == IRTemperatureDataUUID {
-            self.ambientTemperature = SensorTag.getAmbientTemperature(characteristic.value!)
-            self.objectTemperature = SensorTag.getObjectTemperature(characteristic.value!, ambientTemperature: self.ambientTemperature)
+        if characteristic.uuid == IRTemperatureDataUUID {
+            self.ambientTemperature = SensorTag.getAmbientTemperature(value: characteristic.value! as NSData)
+            self.objectTemperature = SensorTag.getObjectTemperature(value: characteristic.value! as NSData, ambientTemperature: self.ambientTemperature)
             self.allSensorValues[0] = self.ambientTemperature
             self.allSensorValues[1] = self.objectTemperature
         }
-        else if characteristic.UUID == AccelerometerDataUUID {
-            let allValues = SensorTag.getAccelerometerData(characteristic.value!)
+        else if characteristic.uuid == AccelerometerDataUUID {
+            let allValues = SensorTag.getAccelerometerData(value: characteristic.value! as NSData)
             self.accelerometerX = allValues[0]
             self.accelerometerY = allValues[1]
             self.accelerometerZ = allValues[2]
@@ -195,12 +196,12 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             self.allSensorValues[3] = self.accelerometerY
             self.allSensorValues[4] = self.accelerometerZ
         }
-        else if characteristic.UUID == HumidityDataUUID {
-            self.relativeHumidity = SensorTag.getRelativeHumidity(characteristic.value!)
+        else if characteristic.uuid == HumidityDataUUID {
+            self.relativeHumidity = SensorTag.getRelativeHumidity(value: characteristic.value! as NSData)
             self.allSensorValues[5] = self.relativeHumidity
         }
-        else if characteristic.UUID == MagnetometerDataUUID {
-            let allValues = SensorTag.getMagnetometerData(characteristic.value!)
+        else if characteristic.uuid == MagnetometerDataUUID {
+            let allValues = SensorTag.getMagnetometerData(value: characteristic.value! as NSData)
             self.magnetometerX = allValues[0]
             self.magnetometerY = allValues[1]
             self.magnetometerZ = allValues[2]
@@ -208,8 +209,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             self.allSensorValues[7] = self.magnetometerY
             self.allSensorValues[8] = self.magnetometerZ
         }
-        else if characteristic.UUID == GyroscopeDataUUID {
-            let allValues = SensorTag.getGyroscopeData(characteristic.value!)
+        else if characteristic.uuid == GyroscopeDataUUID {
+            let allValues = SensorTag.getGyroscopeData(value: characteristic.value! as NSData)
             self.gyroscopeX = allValues[0]
             self.gyroscopeY = allValues[1]
             self.gyroscopeZ = allValues[2]
@@ -217,7 +218,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             self.allSensorValues[10] = self.gyroscopeY
             self.allSensorValues[11] = self.gyroscopeZ
         }
-        else if characteristic.UUID == BarometerDataUUID {
+        else if characteristic.uuid == BarometerDataUUID {
             //println("BarometerDataUUID")
         }
         
@@ -230,16 +231,17 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     /******* UITableViewDataSource *******/
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allSensorLabels.count
     }
     
+
     
     /******* UITableViewDelegate *******/
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let thisCell = tableView.dequeueReusableCellWithIdentifier("sensorTagCell") as! SensorTagTableViewCell
+        let thisCell = tableView.dequeueReusableCell(withIdentifier: "sensorTagCell") as! SensorTagTableViewCell
         thisCell.sensorNameLabel.text  = allSensorLabels[indexPath.row]
         
         let valueString = NSString(format: "%.2f", allSensorValues[indexPath.row])
@@ -255,10 +257,10 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
      
      // Show alert
     func showAlertWithText (header : String = "Warning", message : String) {
-        let alert = UIAlertController(title: header, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-        alert.view.tintColor = UIColor.redColor()
-        self.presentViewController(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: header, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        alert.view.tintColor = UIColor.red
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -272,7 +274,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         
         self.sensorTagTableView.frame = CGRect(x: self.view.bounds.origin.x, y: self.statusLabel.frame.maxY+20, width: self.view.bounds.width, height: self.view.bounds.height)
         
-        self.sensorTagTableView.registerClass(SensorTagTableViewCell.self, forCellReuseIdentifier: "sensorTagCell")
+        self.sensorTagTableView.register(SensorTagTableViewCell.self, forCellReuseIdentifier: "sensorTagCell")
         
         self.sensorTagTableView.tableFooterView = UIView() // to hide empty lines after cells
         self.view.addSubview(self.sensorTagTableView)

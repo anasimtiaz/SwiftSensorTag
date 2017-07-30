@@ -39,17 +39,20 @@ let GyroscopeConfigUUID     = CBUUID(string: "F000AA52-0451-4000-B000-0000000000
 class SensorTag {
     
     // Check name of device from advertisement data
-    class func sensorTagFound (advertisementData: [NSObject : AnyObject]!) -> Bool {
-        let nameOfDeviceFound = (advertisementData as NSDictionary).objectForKey(CBAdvertisementDataLocalNameKey) as? NSString
-        return (nameOfDeviceFound == deviceName)
+    class func sensorTagFound (advertisementData: [String : Any]!) -> Bool {
+        if (advertisementData["kCBAdvDataLocalName"]) != nil {
+            let advData = advertisementData["kCBAdvDataLocalName"] as! String
+            return(advData == deviceName)
+        }
+        return false
     }
     
     
     // Check if the service has a valid UUID
     class func validService (service : CBService) -> Bool {
-        if service.UUID == IRTemperatureServiceUUID || service.UUID == AccelerometerServiceUUID ||
-            service.UUID == HumidityServiceUUID || service.UUID == MagnetometerServiceUUID ||
-            service.UUID == BarometerServiceUUID || service.UUID == GyroscopeServiceUUID {
+        if service.uuid == IRTemperatureServiceUUID || service.uuid == AccelerometerServiceUUID ||
+            service.uuid == HumidityServiceUUID || service.uuid == MagnetometerServiceUUID ||
+            service.uuid == BarometerServiceUUID || service.uuid == GyroscopeServiceUUID {
                 return true
         }
         else {
@@ -60,9 +63,9 @@ class SensorTag {
     
     // Check if the characteristic has a valid data UUID
     class func validDataCharacteristic (characteristic : CBCharacteristic) -> Bool {
-        if characteristic.UUID == IRTemperatureDataUUID || characteristic.UUID == AccelerometerDataUUID ||
-            characteristic.UUID == HumidityDataUUID || characteristic.UUID == MagnetometerDataUUID ||
-            characteristic.UUID == BarometerDataUUID || characteristic.UUID == GyroscopeDataUUID {
+        if characteristic.uuid == IRTemperatureDataUUID || characteristic.uuid == AccelerometerDataUUID ||
+            characteristic.uuid == HumidityDataUUID || characteristic.uuid == MagnetometerDataUUID ||
+            characteristic.uuid == BarometerDataUUID || characteristic.uuid == GyroscopeDataUUID {
                 return true
         }
         else {
@@ -73,9 +76,9 @@ class SensorTag {
     
     // Check if the characteristic has a valid config UUID
     class func validConfigCharacteristic (characteristic : CBCharacteristic) -> Bool {
-        if characteristic.UUID == IRTemperatureConfigUUID || characteristic.UUID == AccelerometerConfigUUID ||
-            characteristic.UUID == HumidityConfigUUID || characteristic.UUID == MagnetometerConfigUUID ||
-            characteristic.UUID == BarometerConfigUUID || characteristic.UUID == GyroscopeConfigUUID {
+        if characteristic.uuid == IRTemperatureConfigUUID || characteristic.uuid == AccelerometerConfigUUID ||
+            characteristic.uuid == HumidityConfigUUID || characteristic.uuid == MagnetometerConfigUUID ||
+            characteristic.uuid == BarometerConfigUUID || characteristic.uuid == GyroscopeConfigUUID {
                 return true
         }
         else {
@@ -111,35 +114,35 @@ class SensorTag {
     // Convert NSData to array of bytes
     class func dataToSignedBytes16(value : NSData) -> [Int16] {
         let count = value.length
-        var array = [Int16](count: count, repeatedValue: 0)
-        value.getBytes(&array, length:count * sizeof(Int16))
+        var array = [Int16](repeating: 0, count: count)
+        value.getBytes(&array, length:count * MemoryLayout<Int16>.size)
         return array
     }
     
     class func dataToUnsignedBytes16(value : NSData) -> [UInt16] {
         let count = value.length
-        var array = [UInt16](count: count, repeatedValue: 0)
-        value.getBytes(&array, length:count * sizeof(UInt16))
+        var array = [UInt16](repeating: 0, count: count)
+        value.getBytes(&array, length:count * MemoryLayout<UInt16>.size)
         return array
     }
     
     class func dataToSignedBytes8(value : NSData) -> [Int8] {
         let count = value.length
-        var array = [Int8](count: count, repeatedValue: 0)
-        value.getBytes(&array, length:count * sizeof(Int8))
+        var array = [Int8](repeating: 0, count: count)
+        value.getBytes(&array, length:count * MemoryLayout<Int8>.size)
         return array
     }
     
     // Get ambient temperature value
     class func getAmbientTemperature(value : NSData) -> Double {
-        let dataFromSensor = dataToSignedBytes16(value)
+        let dataFromSensor = dataToSignedBytes16(value: value)
         let ambientTemperature = Double(dataFromSensor[1])/128
         return ambientTemperature
     }
     
     // Get object temperature value
     class func getObjectTemperature(value : NSData, ambientTemperature : Double) -> Double {
-        let dataFromSensor = dataToSignedBytes16(value)
+        let dataFromSensor = dataToSignedBytes16(value: value)
         let Vobj2 = Double(dataFromSensor[0]) * 0.00000015625
         
         let Tdie2 = ambientTemperature + 273.15
@@ -165,7 +168,7 @@ class SensorTag {
     
     // Get Accelerometer values
     class func getAccelerometerData(value: NSData) -> [Double] {
-        let dataFromSensor = dataToSignedBytes8(value)
+        let dataFromSensor = dataToSignedBytes8(value: value)
         let xVal = Double(dataFromSensor[0]) / 64
         let yVal = Double(dataFromSensor[1]) / 64
         let zVal = Double(dataFromSensor[2]) / 64 * -1
@@ -174,14 +177,14 @@ class SensorTag {
     
     // Get Relative Humidity
     class func getRelativeHumidity(value: NSData) -> Double {
-        let dataFromSensor = dataToUnsignedBytes16(value)
+        let dataFromSensor = dataToUnsignedBytes16(value: value)
         let humidity = -6 + 125/65536 * Double(dataFromSensor[1])
         return humidity
     }
     
     // Get magnetometer values
     class func getMagnetometerData(value: NSData) -> [Double] {
-        let dataFromSensor = dataToSignedBytes16(value)
+        let dataFromSensor = dataToSignedBytes16(value: value)
         let xVal = Double(dataFromSensor[0]) * 2000 / 65536 * -1
         let yVal = Double(dataFromSensor[1]) * 2000 / 65536 * -1
         let zVal = Double(dataFromSensor[2]) * 2000 / 65536
@@ -190,7 +193,7 @@ class SensorTag {
     
     // Get gyroscope values
     class func getGyroscopeData(value: NSData) -> [Double] {
-        let dataFromSensor = dataToSignedBytes16(value)
+        let dataFromSensor = dataToSignedBytes16(value: value)
         let yVal = Double(dataFromSensor[0]) * 500 / 65536 * -1
         let xVal = Double(dataFromSensor[1]) * 500 / 65536
         let zVal = Double(dataFromSensor[2]) * 500 / 65536

@@ -14,26 +14,22 @@ let deviceName = "SensorTag"
 
 // Service UUIDs
 let IRTemperatureServiceUUID = CBUUID(string: "F000AA00-0451-4000-B000-000000000000")
-let AccelerometerServiceUUID = CBUUID(string: "F000AA10-0451-4000-B000-000000000000")
 let HumidityServiceUUID      = CBUUID(string: "F000AA20-0451-4000-B000-000000000000")
-let MagnetometerServiceUUID  = CBUUID(string: "F000AA30-0451-4000-B000-000000000000")
 let BarometerServiceUUID     = CBUUID(string: "F000AA40-0451-4000-B000-000000000000")
-let GyroscopeServiceUUID     = CBUUID(string: "F000AA50-0451-4000-B000-000000000000")
+let LuxometerServiceUUID     = CBUUID(string: "F000AA70-0451-4000-B000-000000000000")
+let MovementServiceUUID      = CBUUID(string: "F000AA80-0451-4000-B000-000000000000")
 
 // Characteristic UUIDs
 let IRTemperatureDataUUID   = CBUUID(string: "F000AA01-0451-4000-B000-000000000000")
 let IRTemperatureConfigUUID = CBUUID(string: "F000AA02-0451-4000-B000-000000000000")
-let AccelerometerDataUUID   = CBUUID(string: "F000AA11-0451-4000-B000-000000000000")
-let AccelerometerConfigUUID = CBUUID(string: "F000AA12-0451-4000-B000-000000000000")
 let HumidityDataUUID        = CBUUID(string: "F000AA21-0451-4000-B000-000000000000")
 let HumidityConfigUUID      = CBUUID(string: "F000AA22-0451-4000-B000-000000000000")
-let MagnetometerDataUUID    = CBUUID(string: "F000AA31-0451-4000-B000-000000000000")
-let MagnetometerConfigUUID  = CBUUID(string: "F000AA32-0451-4000-B000-000000000000")
 let BarometerDataUUID       = CBUUID(string: "F000AA41-0451-4000-B000-000000000000")
 let BarometerConfigUUID     = CBUUID(string: "F000AA42-0451-4000-B000-000000000000")
-let GyroscopeDataUUID       = CBUUID(string: "F000AA51-0451-4000-B000-000000000000")
-let GyroscopeConfigUUID     = CBUUID(string: "F000AA52-0451-4000-B000-000000000000")
-
+let LuxometerDataUUID       = CBUUID(string: "F000AA71-0451-4000-B000-000000000000")
+let LuxometerConfigUUID     = CBUUID(string: "F000AA72-0451-4000-B000-000000000000")
+let MovementDataUUID        = CBUUID(string: "F000AA81-0451-4000-B000-000000000000")
+let MovementConfigUUID      = CBUUID(string: "F000AA82-0451-4000-B000-000000000000")
 
 
 class SensorTag {
@@ -42,7 +38,7 @@ class SensorTag {
     class func sensorTagFound (advertisementData: [String : Any]!) -> Bool {
         if (advertisementData["kCBAdvDataLocalName"]) != nil {
             let advData = advertisementData["kCBAdvDataLocalName"] as! String
-            return(advData == deviceName)
+            return(advData.range(of: deviceName) != nil)
         }
         return false
     }
@@ -50,9 +46,9 @@ class SensorTag {
     
     // Check if the service has a valid UUID
     class func validService (service : CBService) -> Bool {
-        if service.uuid == IRTemperatureServiceUUID || service.uuid == AccelerometerServiceUUID ||
-            service.uuid == HumidityServiceUUID || service.uuid == MagnetometerServiceUUID ||
-            service.uuid == BarometerServiceUUID || service.uuid == GyroscopeServiceUUID {
+        if service.uuid == IRTemperatureServiceUUID || service.uuid == MovementServiceUUID ||
+            service.uuid == HumidityServiceUUID || service.uuid == LuxometerServiceUUID ||
+            service.uuid == BarometerServiceUUID  {
                 return true
         }
         else {
@@ -63,9 +59,9 @@ class SensorTag {
     
     // Check if the characteristic has a valid data UUID
     class func validDataCharacteristic (characteristic : CBCharacteristic) -> Bool {
-        if characteristic.uuid == IRTemperatureDataUUID || characteristic.uuid == AccelerometerDataUUID ||
-            characteristic.uuid == HumidityDataUUID || characteristic.uuid == MagnetometerDataUUID ||
-            characteristic.uuid == BarometerDataUUID || characteristic.uuid == GyroscopeDataUUID {
+        if characteristic.uuid == IRTemperatureDataUUID || characteristic.uuid == MovementDataUUID ||
+            characteristic.uuid == HumidityDataUUID || characteristic.uuid == LuxometerDataUUID ||
+            characteristic.uuid == BarometerDataUUID {
                 return true
         }
         else {
@@ -76,9 +72,9 @@ class SensorTag {
     
     // Check if the characteristic has a valid config UUID
     class func validConfigCharacteristic (characteristic : CBCharacteristic) -> Bool {
-        if characteristic.uuid == IRTemperatureConfigUUID || characteristic.uuid == AccelerometerConfigUUID ||
-            characteristic.uuid == HumidityConfigUUID || characteristic.uuid == MagnetometerConfigUUID ||
-            characteristic.uuid == BarometerConfigUUID || characteristic.uuid == GyroscopeConfigUUID {
+        if characteristic.uuid == IRTemperatureConfigUUID || characteristic.uuid == MovementConfigUUID ||
+            characteristic.uuid == HumidityConfigUUID || characteristic.uuid == LuxometerConfigUUID ||
+            characteristic.uuid == BarometerConfigUUID {
                 return true
         }
         else {
@@ -112,37 +108,29 @@ class SensorTag {
     
     
     // Convert NSData to array of bytes
-    class func dataToSignedBytes16(value : NSData) -> [Int16] {
-        let count = value.length
+    class func dataToSignedBytes16(value : NSData, count: Int) -> [Int16] {
         var array = [Int16](repeating: 0, count: count)
         value.getBytes(&array, length:count * MemoryLayout<Int16>.size)
         return array
     }
     
-    class func dataToUnsignedBytes16(value : NSData) -> [UInt16] {
-        let count = value.length
+    class func dataToUnsignedBytes16(value : NSData, count: Int) -> [UInt16] {
         var array = [UInt16](repeating: 0, count: count)
         value.getBytes(&array, length:count * MemoryLayout<UInt16>.size)
         return array
     }
     
-    class func dataToSignedBytes8(value : NSData) -> [Int8] {
-        let count = value.length
+    class func dataToSignedBytes8(value : NSData, count: Int) -> [Int8] {
         var array = [Int8](repeating: 0, count: count)
         value.getBytes(&array, length:count * MemoryLayout<Int8>.size)
         return array
     }
     
     // Get ambient temperature value
-    class func getAmbientTemperature(value : NSData) -> Double {
-        let dataFromSensor = dataToSignedBytes16(value: value)
+    class func getTemperatureData(value : NSData) -> [Double] {
+        // The TMP007 IR Temperature sensor is not fitted on SensorTags produced after June 2017.
+        let dataFromSensor = dataToSignedBytes16(value: value, count: 2)
         let ambientTemperature = Double(dataFromSensor[1])/128
-        return ambientTemperature
-    }
-    
-    // Get object temperature value
-    class func getObjectTemperature(value : NSData, ambientTemperature : Double) -> Double {
-        let dataFromSensor = dataToSignedBytes16(value: value)
         let Vobj2 = Double(dataFromSensor[0]) * 0.00000015625
         
         let Tdie2 = ambientTemperature + 273.15
@@ -163,40 +151,29 @@ class SensorTag {
         
         let objectTemperature = (tObj - 273.15)
         
-        return objectTemperature
+        return [objectTemperature, ambientTemperature]
     }
     
     // Get Accelerometer values
-    class func getAccelerometerData(value: NSData) -> [Double] {
-        let dataFromSensor = dataToSignedBytes8(value: value)
-        let xVal = Double(dataFromSensor[0]) / 64
-        let yVal = Double(dataFromSensor[1]) / 64
-        let zVal = Double(dataFromSensor[2]) / 64 * -1
-        return [xVal, yVal, zVal]
+    class func getMovementData(value: NSData) -> [Double] {
+        let dataFromSensor = dataToSignedBytes16(value: value, count: 9)
+        let gx = Double(dataFromSensor[0]) * 500.0 / 65536.0
+        let gy = Double(dataFromSensor[1]) * 500.0 / 65536.0
+        let gz = Double(dataFromSensor[2]) * 500.0 / 65536.0
+        let range = 2.0
+        let ax = Double(dataFromSensor[3]) * range / 32768.0
+        let ay = Double(dataFromSensor[4]) * range / 32768.0
+        let az = Double(dataFromSensor[5]) * range / 32768.0
+        let mx = Double(dataFromSensor[6])
+        let my = Double(dataFromSensor[7])
+        let mz = Double(dataFromSensor[8])
+        return [gx, gy, gz, ax, ay, az, mx, my, mz]
     }
     
     // Get Relative Humidity
     class func getRelativeHumidity(value: NSData) -> Double {
-        let dataFromSensor = dataToUnsignedBytes16(value: value)
+        let dataFromSensor = dataToUnsignedBytes16(value: value, count: 2)
         let humidity = -6 + 125/65536 * Double(dataFromSensor[1])
         return humidity
-    }
-    
-    // Get magnetometer values
-    class func getMagnetometerData(value: NSData) -> [Double] {
-        let dataFromSensor = dataToSignedBytes16(value: value)
-        let xVal = Double(dataFromSensor[0]) * 2000 / 65536 * -1
-        let yVal = Double(dataFromSensor[1]) * 2000 / 65536 * -1
-        let zVal = Double(dataFromSensor[2]) * 2000 / 65536
-        return [xVal, yVal, zVal]
-    }
-    
-    // Get gyroscope values
-    class func getGyroscopeData(value: NSData) -> [Double] {
-        let dataFromSensor = dataToSignedBytes16(value: value)
-        let yVal = Double(dataFromSensor[0]) * 500 / 65536 * -1
-        let xVal = Double(dataFromSensor[1]) * 500 / 65536
-        let zVal = Double(dataFromSensor[2]) * 500 / 65536
-        return [xVal, yVal, zVal]
     }
 }
